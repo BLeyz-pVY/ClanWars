@@ -1,0 +1,48 @@
+{
+  "Name": "rejim sexxxx",
+  "Description": "ebitec' cyki",
+  "StartClientVersion": 573,
+  "MapFilter": {
+    "IsBlank": false,
+    "HasParcourEnd": false
+  },
+  "MapLists": [
+    {
+      "MapListId": 324,
+      "Name": "Официальные карты"
+    },
+    {
+      "MapListId": 581
+    }
+  ],
+  "Parameters": {
+    "Bool": [
+      {
+        "Name": "MapRotation",
+        "DisplayName": "GmParams/MapRotation",
+        "Default": true,
+        "Order": 1
+      },
+      {
+        "Name": "OnlyKnives",
+        "DisplayName": "GmParams/OnlyKnives",
+        "Order": 2
+      },
+      {
+        "Name": "OnlyPlayerBlocksDmg",
+        "DisplayName": "GmParams/OnlyPlayerBlocksDmg",
+        "Order": 3
+      },
+      {
+        "Name": "LoosenBlocks",
+        "DisplayName": "GmParams/LoosenBlocks",
+        "Order": 4
+      },
+      {
+        "Name": "FriendlyFire",
+        "DisplayName": "GmParams/FriendlyFire",
+        "Order": 5
+      }
+    ]
+  }
+}
