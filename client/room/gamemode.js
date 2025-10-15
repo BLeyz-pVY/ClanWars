@@ -1,13 +1,12 @@
 import { DisplayValueHeader } from 'pixel_combats/basic';
 import { Game, Players, Inventory, LeaderBoard, BuildBlocksSet, Teams, Damage, BreackGraph, Ui, Properties, GameMode, Spawns, Timers, TeamsBalancer, NewGame, NewGameVote } from 'pixel_combats/room';
 import * as teams from './default_teams.js';
-import * as default_timer from './default_timer.js';
 
 // настройки
 const WaitingPlayersTime = 10;
 const BuildBaseTime = 30;
 const KnivesModeTime = 40;
-const GameModeTime = default_timer.game_mode_length_seconds();
+const GameModeTime = 750;
 const MockModeTime = 20;
 const EndOfMatchTime = 8;
 const VoteTime = 20;
