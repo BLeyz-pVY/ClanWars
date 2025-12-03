@@ -24,24 +24,19 @@
         "Order": 1
       },
       {
-        "Name": "OnlyKnives",
-        "DisplayName": "GmParams/OnlyKnives",
-        "Order": 2
-      },
-      {
         "Name": "OnlyPlayerBlocksDmg",
         "DisplayName": "GmParams/OnlyPlayerBlocksDmg",
-        "Order": 3
+        "Order": 2
       },
       {
         "Name": "LoosenBlocks",
         "DisplayName": "GmParams/LoosenBlocks",
-        "Order": 4
+        "Order": 3
       },
       {
         "Name": "FriendlyFire",
         "DisplayName": "GmParams/FriendlyFire",
-        "Order": 5
+        "Order": 4
       }
     ]
   }
