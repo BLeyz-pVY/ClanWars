@@ -3,12 +3,11 @@ import { Game, Players, Inventory, LeaderBoard, BuildBlocksSet, Teams, Damage, B
 import * as teams from './default_teams.js';
 
 // настройки
-const WaitingPlayersTime = 10;
-const BuildBaseTime = 30;
-const KnivesModeTime = 40;
-const GameModeTime = 750;
+const WaitingPlayersTime = 12;
+const BuildBaseTime = 60;
+const GameModeTime = 69;
 const MockModeTime = 20;
-const EndOfMatchTime = 8;
+const EndOfMatchTime = 10;
 const VoteTime = 20;
 
 const KILL_SCORES = 5;
@@ -19,7 +18,6 @@ const SCORES_TIMER_INTERVAL = 30;
 // имена используемых объектов
 const WaitingStateValue = "Waiting";
 const BuildModeStateValue = "BuildMode";
-const KnivesModeStateValue = "KnivesMode";
 const GameStateValue = "Game";
 const MockModeStateValue = "MockMode";
 const EndOfMatchStateValue = "EndOfMatch";
@@ -136,9 +134,6 @@ mainTimer.OnTimer.Add(function () {
 			SetBuildMode();
 			break;
 		case BuildModeStateValue:
-			SetKnivesMode();
-			break;
-		case KnivesModeStateValue:
 			SetGameMode();
 			break;
 		case GameStateValue:
@@ -166,32 +161,18 @@ function SetWaitingMode() {
 function SetBuildMode() {
 	stateProp.Value = BuildModeStateValue;
 	Ui.GetContext().Hint.Value = "Hint/BuildBase";
+	
 	var inventory = Inventory.GetContext();
 	inventory.Main.Value = false;
 	inventory.Secondary.Value = false;
 	inventory.Melee.Value = true;
 	inventory.Explosive.Value = false;
 	inventory.Build.Value = true;
+	
 	// запрет нанесения урона
-	Damage.GetContext().DamageOut.Value = false;
-
-	mainTimer.Restart(BuildBaseTime);
-	Spawns.GetContext().enable = true;
-	SpawnTeams();
-}
-function SetKnivesMode() {
-	stateProp.Value = KnivesModeStateValue;
-	Ui.GetContext().Hint.Value = "Hint/KnivesMode";
-	var inventory = Inventory.GetContext();
-	inventory.Main.Value = false;
-	inventory.Secondary.Value = false;
-	inventory.Melee.Value = true;
-	inventory.Explosive.Value = false;
-	inventory.Build.Value = true;
-	// разрешение нанесения урона
 	Damage.GetContext().DamageOut.Value = true;
 
-	mainTimer.Restart(KnivesModeTime);
+	mainTimer.Restart(BuildBaseTime);
 	Spawns.GetContext().enable = true;
 	SpawnTeams();
 }
@@ -202,19 +183,12 @@ function SetGameMode() {
 	Ui.GetContext().Hint.Value = "Hint/AttackEnemies";
 
 	var inventory = Inventory.GetContext();
-	if (GameMode.Parameters.GetBool("OnlyKnives")) {
-		inventory.Main.Value = false;
-		inventory.Secondary.Value = false;
-		inventory.Melee.Value = true;
-		inventory.Explosive.Value = false;
-		inventory.Build.Value = true;
-	} else {
-		inventory.Main.Value = true;
-		inventory.Secondary.Value = true;
-		inventory.Melee.Value = true;
-		inventory.Explosive.Value = true;
-		inventory.Build.Value = true;
-	}
+	inventory.Main.Value = true;
+	inventory.Secondary.Value = true;
+	inventory.Melee.Value = true;
+	inventory.Explosive.Value = true;
+	inventory.Build.Value = true;
+	
 
 	mainTimer.Restart(GameModeTime);
 	Spawns.GetContext().Despawn();
