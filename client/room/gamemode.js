@@ -7,8 +7,7 @@ const WaitingPlayersTime = 12;
 const BuildBaseTime = 60;
 const GameModeTime = 79;
 const MockModeTime = 20;
-const EndOfMatchTime = 10;
-const VoteTime = 20;
+const EndOfMatchTime = 12;
 
 const KILL_SCORES = 5;
 const WINNER_SCORES = 10;
@@ -193,8 +192,7 @@ function SetEndOfMatch() {
 		for (const win_player of leaderboard[0].Team.Players) {
 			win_player.Properties.Scores.Value += WINNER_SCORES;
 		}
-	}
-	else {
+	} else {
 		SetEndOfMatch_EndMode();
 	}
 }
@@ -243,20 +241,6 @@ function SetEndOfMatch_EndMode() {
 	Game.GameOver(LeaderBoard.GetTeams());
 	mainTimer.Restart(EndOfMatchTime);
 }
-
-function OnVoteResult(v) {
-	if (v.Result === null) return;
-	NewGame.RestartGame(v.Result);
-}
-NewGameVote.OnResult.Add(OnVoteResult); // вынесено из функции, которая выполняется только на сервере, чтобы не зависало, если не отработает, также чтобы не давало баг, если вызван метод 2 раза и появилось 2 подписки
-
-function start_vote() {
-	NewGameVote.Start({
-		Variants: [{ MapId: 0 }],
-		Timer: VoteTime
-	}, MapRotation ? 3 : 0);
-}
-
 function SpawnTeams() {
 	for (const team of Teams)
 		Spawns.GetContext(team).Spawn();
