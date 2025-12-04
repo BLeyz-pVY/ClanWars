@@ -241,6 +241,9 @@ function SetEndOfMatch_EndMode() {
 	Game.GameOver(LeaderBoard.GetTeams());
 	mainTimer.Restart(EndOfMatchTime);
 }
+function RestartGame() {
+	Game.RestartGame();
+}
 function SpawnTeams() {
 	for (const team of Teams)
 		Spawns.GetContext(team).Spawn();
