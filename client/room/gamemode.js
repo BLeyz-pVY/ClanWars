@@ -4,8 +4,8 @@ import * as teams from './default_teams.js';
 
 // настройки
 const WaitingPlayersTime = 12;
-const BuildBaseTime = 60;
-const GameModeTime = 79;
+const BuildBaseTime = 60-50;
+const GameModeTime = 79-60;
 const MockModeTime = 20;
 const EndOfMatchTime = 12;
 
