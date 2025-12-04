@@ -242,7 +242,7 @@ function SetEndOfMatch_EndMode() {
 	mainTimer.Restart(EndOfMatchTime);
 }
 function RestartGame() {
-	Game.RestartGame();
+	NewGame.RestartGame();
 }
 function SpawnTeams() {
 	for (const team of Teams)
