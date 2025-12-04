@@ -8,12 +8,9 @@
   },
   "MapLists": [
     {
-      "MapListId": 324,
+      "MapListId": 25729,
       "Name": "Официальные карты"
     },
-    {
-      "MapListId": 581
-    }
   ],
   "Parameters": {
     "Bool": [
