@@ -5,15 +5,13 @@ import * as teams from './default_teams.js';
 // настройки
 const WaitingPlayersTime = 12;
 const BuildBaseTime = 60;
-const GameModeTime = 129;
+const GameModeTime = 79;
 const MockModeTime = 20;
 const EndOfMatchTime = 10;
 const VoteTime = 20;
 
 const KILL_SCORES = 5;
 const WINNER_SCORES = 10;
-const TIMER_SCORES = 5;
-const SCORES_TIMER_INTERVAL = 30;
 
 // имена используемых объектов
 const WaitingStateValue = "Waiting";
@@ -119,14 +117,6 @@ Damage.OnKill.Add(function (player, killed) {
 	}
 });
 
-// таймер очков за проведенное время
-scores_timer.OnTimer.Add(function () {
-	for (const player of Players.All) {
-		if (player.Team == null) continue; // если вне команд то не начисляем ничего по таймеру
-		player.Properties.Scores.Value += TIMER_SCORES;
-	}
-});
-
 // таймер переключения состояний
 mainTimer.OnTimer.Add(function () {
 	switch (stateProp.Value) {
@@ -169,7 +159,7 @@ function SetBuildMode() {
 	inventory.Explosive.Value = false;
 	inventory.Build.Value = true;
 	
-	// запрет нанесения урона
+	// разрешаем нанесение урона
 	Damage.GetContext().DamageOut.Value = true;
 
 	mainTimer.Restart(BuildBaseTime);
@@ -195,7 +185,6 @@ function SetGameMode() {
 	SpawnTeams();
 }
 function SetEndOfMatch() {
-	scores_timer.Stop(); // выключаем таймер очков
 	const leaderboard = LeaderBoard.GetTeams();
 	if (leaderboard[0].Weight !== leaderboard[1].Weight) {
 		// режим прикола вконце катки
@@ -212,7 +201,6 @@ function SetEndOfMatch() {
 function SetMockMode(winners, loosers) {
 	// задаем состояние игры
 	stateProp.Value = MockModeStateValue;
-	scores_timer.Stop(); // выключаем таймер очков
 
 	// подсказка
 	Ui.GetContext(winners).Hint.Value = "Hint/MockHintForWinners";
@@ -246,7 +234,6 @@ function SetMockMode(winners, loosers) {
 }
 function SetEndOfMatch_EndMode() {
 	stateProp.Value = EndOfMatchStateValue;
-	scores_timer.Stop(); // выключаем таймер очков
 	Ui.GetContext().Hint.Value = "Hint/EndOfMatch";
 
 	var spawns = Spawns.GetContext();
@@ -274,5 +261,3 @@ function SpawnTeams() {
 	for (const team of Teams)
 		Spawns.GetContext(team).Spawn();
 }
-
-scores_timer.RestartLoop(SCORES_TIMER_INTERVAL);
